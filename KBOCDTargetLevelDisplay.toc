@@ -1,0 +1,11 @@
+## Interface: 120000
+## Title: KBOCD Target Level Display
+## Notes: Displays a simple frame with the targets level on the target unit frame
+## Author: KurenBatsu
+## Version: 1.0
+## SavedVariablesPerCharacter: KBOCDTargetLevelDisplayDB
+
+KBOCD_Target_Level_Display_Core.lua
+KBOCD_Target_Level_Display_ConfigCore.lua
+KBOCD_Target_Level_Display_ConfigElements.lua
+KBOCD_Target_Level_Display_Config.lua
