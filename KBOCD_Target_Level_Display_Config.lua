@@ -111,18 +111,26 @@ eventFrame:RegisterEvent("UNIT_LEVEL")
 eventFrame:SetScript("OnEvent", function(_, event, eventValue)
     if event == "ADDON_LOADED" and eventValue == "KBOCDTargetLevelDisplay" then
         KBOCDTargetLevelDisplay.InitializeUserValues()
+
     elseif event == "PLAYER_LOGIN" then
         KBOCDTargetLevelDisplay.CreateTargetLevelFrame()
         KBOCDTargetLevelDisplay.InitializeConfigCoreAliases()
-    elseif event == "PLAYER_ENTERING_WORLD" and not KBOCDTargetLevelDisplay.initialEnteringWorldCompleted then
-        KBOCDTargetLevelDisplay.CreateTargetLevelFrame()
-        KBOCDTargetLevelDisplay.InitializeConfigCoreAliases()
-        KBOCDTargetLevelDisplay.CreateUIElementValuesTable()
-        KBOCDTargetLevelDisplay:CreateConfigPanel()
 
-        DEFAULT_CHAT_FRAME:AddMessage("|cfff2e147KBOCDTargetLevelDisplay |cffa19d78loaded.|r")
-        KBOCDTargetLevelDisplay.initialEnteringWorldCompleted = true
+    elseif event == "PLAYER_ENTERING_WORLD" then
+        KBOCDTargetLevelDisplay.UpdateTargetLevelFrame()
+
+        if not KBOCDTargetLevelDisplay.initialEnteringWorldCompleted then
+            KBOCDTargetLevelDisplay.CreateTargetLevelFrame()
+            KBOCDTargetLevelDisplay.InitializeConfigCoreAliases()
+            KBOCDTargetLevelDisplay.CreateUIElementValuesTable()
+            KBOCDTargetLevelDisplay:CreateConfigPanel()
+
+            DEFAULT_CHAT_FRAME:AddMessage("|cfff2e147KBOCDTargetLevelDisplay |cffa19d78loaded.|r")
+            KBOCDTargetLevelDisplay.initialEnteringWorldCompleted = true
+        end
+
     elseif event == "PLAYER_TARGET_CHANGED" or (event == "UNIT_LEVEL" and eventValue == "target") then
         KBOCDTargetLevelDisplay.UpdateTargetLevelFrame()
+
     end
 end)
